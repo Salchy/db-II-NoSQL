@@ -24,3 +24,77 @@ updateMany()
 deleteOne()
 deleteMany()
 
+----------------
+
+Si trabajamos con el _id del documento, vamos a utilizar la versión 'One'. No tendría sentido utilizar 'many'
+
+------------------------------------------------
+--- Creacion de una base de datos en MongoDB ---
+------------------------------------------------
+
+use [Nombre]
+
+También sirve para cambiar la base de datos en uso, si no existe, la crea.
+
+Para hacer referencia a la base de datos en uso, usamos la variable 'db'
+Si queremos ver qué base de datos tenemos seleccionado, ejecutamos el comando 'db'
+
+Para hacer referencia a una base de datos, usamos db.[nombre], de esta manera podremos hacer acciones sobre
+la base de datos que insertemos entre los corchetes.
+
+------------------------------
+--- Creacion de documentos ---
+------------------------------
+
+- insertOne() -- Agrega un registro
+
+db.[tabla].insertOne({
+	key: "value",
+	key2: 23,
+	key3: true
+})
+
+-----------------------------
+
+- insertMany() -- Agrega varios registros
+
+db.empleados.insertMany([
+  { nombre: "Ana", apellido: "Gómez", edad: 28, puesto: "Diseñadora" },
+  { nombre: "Carlos", apellido: "López", edad: 40, puesto: "Gerente" }
+])
+
+Se usa un array [] con varios objetos {}.
+Ideal para cargar múltiples registros de una sola vez.
+
+-----------------------------------------
+--- Lectura (Consultas) de documentos ---
+-----------------------------------------
+
+- find()
+
+db.[tabla].find([filtros]) -- Los filtros son opcionales
+
+Devuelve todos los documentos de una colección.
+
+db.[tabla].find().pretty()
+
+Muestra cada documento en varias lineas, facilitando la lectura.
+
+db.[tabla].find({ nombre: "Juan" })
+Filtra los documentos cuyo campo nombre sea exactamente "Juan".
+
+- Leer sólo un documento:
+db.empleados.findOne({ nombre: "Juan" })
+
+- Diferencias entre Find y FindOne
+FindOne, te devuelve sólo un documento, sirve para cuando sabemos que sólo nos interesa un documento.
+Find, devuelve un listado de posibles coincidencias, aun que sea una sóla.
+
+Forma correcta:
+db.empleados.find({ _id: ObjectId("6651bd7e87f9aefad6432a67") }) -- Nótese la funcion ObjectId
+
+Regla práctica: Siempre que filtres por _id, usá ObjectId(...)
+
+-------------------------
+
+-- Falta resumir Update y Delete
