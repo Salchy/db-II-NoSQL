@@ -1,0 +1,26 @@
+Hay 2 versiones de operaciones:
+
+- One: Realiza la acción sobre el primer documento que cumple con el filtro.
+
+- Many: Realiza la acción sobre todos los documentos que cumplan con el filtro.
+
+-------------------------
+---- CRUD en MongoDB ----
+-------------------------
+
+- Crear: insert
+insertOne()
+insertMany()
+
+- Leer: find
+find()
+findOne()
+
+- Actualizar: update
+updateOne()
+updateMany()
+
+- Eliminar: delete
+deleteOne()
+deleteMany()
+
