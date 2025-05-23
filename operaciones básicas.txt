@@ -4,9 +4,9 @@ Hay 2 versiones de operaciones:
 
 - Many: Realiza la acción sobre todos los documentos que cumplan con el filtro.
 
--------------------------
----- CRUD en MongoDB ----
--------------------------
+			-------------------------
+			---- CRUD en MongoDB ----
+			-------------------------
 
 - Crear: insert
 insertOne()
@@ -28,9 +28,9 @@ deleteMany()
 
 Si trabajamos con el _id del documento, vamos a utilizar la versión 'One'. No tendría sentido utilizar 'many'
 
-------------------------------------------------
---- Creacion de una base de datos en MongoDB ---
-------------------------------------------------
+			------------------------------------------------
+			--- Creacion de una base de datos en MongoDB ---
+			------------------------------------------------
 
 use [Nombre]
 
@@ -42,9 +42,9 @@ Si queremos ver qué base de datos tenemos seleccionado, ejecutamos el comando '
 Para hacer referencia a una base de datos, usamos db.[nombre], de esta manera podremos hacer acciones sobre
 la base de datos que insertemos entre los corchetes.
 
-------------------------------
---- Creacion de documentos ---
-------------------------------
+				------------------------------
+				--- Creacion de documentos ---
+				------------------------------
 
 - insertOne() -- Agrega un registro
 
@@ -66,15 +66,15 @@ db.empleados.insertMany([
 Se usa un array [] con varios objetos {}.
 Ideal para cargar múltiples registros de una sola vez.
 
------------------------------------------
---- Lectura (Consultas) de documentos ---
------------------------------------------
+				-----------------------------------------
+				--- Lectura (Consultas) de documentos ---
+				-----------------------------------------
 
 - find()
 
 db.[tabla].find([filtros]) -- Los filtros son opcionales
 
-Devuelve todos los documentos de una colección.
+Devuelve una LISTA con todos los documentos de una colección.
 
 db.[tabla].find().pretty()
 
@@ -88,13 +88,56 @@ db.empleados.findOne({ nombre: "Juan" })
 
 - Diferencias entre Find y FindOne
 FindOne, te devuelve sólo un documento, sirve para cuando sabemos que sólo nos interesa un documento.
-Find, devuelve un listado de posibles coincidencias, aun que sea una sóla.
+Find, devuelve un LISTADO de posibles coincidencias, aun que sea una sóla.
 
 Forma correcta:
 db.empleados.find({ _id: ObjectId("6651bd7e87f9aefad6432a67") }) -- Nótese la funcion ObjectId
 
-Regla práctica: Siempre que filtres por _id, usá ObjectId(...)
+Regla práctica: Siempre que filtremos por _id, se usa ObjectId(...)
 
--------------------------
+				--------------
+				--- UPDATE ---
+				--------------
 
--- Falta resumir Update y Delete
+
+- Modifica el primer documento que coincida con el filtro
+
+db.[tabla].updateOne({ [valor a buscar] }, { $set: { key: "value"}})
+
+- actualiza varios campos
+
+db.empleados.updateOne(
+  { nombre: "Juan" },
+  { $set: { puesto: "Líder Técnico", edad: 33 } }
+)
+
+-- NOTA: Si no se pone el $set, reemplazará toda la estructura con la nueva:
+
+--- UPDATE MANY
+
+-- Modifica todos los documentos que cumplan con el filtro.
+
+db.empleados.updateMany(
+  { puesto: "Diseñadora" },
+  { $set: { puesto: "Diseñadora UX" } }
+)
+
+				--------------
+				--- DELETE ---
+				--------------
+
+- Elimina el primer documento que coincida con el filtro
+
+db.empleados.deleteOne({ apellido: "López" })
+
+- Eliminar por _id:
+db.empleados.deleteOne({_id: ObjectId("6651bd7e87f9aefad6432a67")})
+
+deleteMany()
+
+-- Elimina todos los documentos que cumplan con el filtro
+
+db.empleados.deleteMany({ edad: 60 })
+
+-- Borrar todos los documentos:
+db.empleados.deleteMany({})
