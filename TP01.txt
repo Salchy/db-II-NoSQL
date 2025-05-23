@@ -1,0 +1,53 @@
+Parte 1 – Creación de la base de datos y colecciones
+Se desea crear una base de datos llamada academia. Dentro de ella, se deben crear tres colecciones:
+cursos: almacena información sobre los cursos ofrecidos
+estudiantes: guarda los datos de quienes se inscriben a los cursos
+docentes: contiene información de los profesores
+
+db.createCollection("cursos")
+db.createCollection("estudiantes")
+db.createCollection("docentes")
+show collections
+
+Parte 2 – Inserciones
+2.1 Inserción de cursos
+
+db.cursos.insertMany([
+	{nombre: "JavaScript desde cero", duracion: 40, nivel: "principiante"},
+	{nombre: "HTML y CSS desde cero", duracion: 45, nivel: "principiante"},
+	{nombre: "JavaScript Avanzado", duracion: 35, nivel: "avanzado", requiere: "JavaScript desde cero"},
+])
+
+2.2 Inserción de estudiantes
+
+db.estudiantes.insertMany([
+	{
+		Nombre: "Sofía",
+		Edad: 22,
+		Dirección: {
+			Calle: "San Martín",
+			Número: 1234,
+			Provincia: "Córdoba"
+		}
+	},
+	{
+		Nombre: "Juan",
+		Edad: 30,
+		Dirección: {
+			Calle: "La Rioja",
+			Número: 1234,
+			Provincia: "Buenos Aires"
+		}
+	},
+	{
+		Nombre: "Raul",
+		Edad: 40,
+		Dirección: {
+			Calle: "Domingo Peron",
+			Número: 1234,
+			Provincia: "Buenos Aires"
+		}
+	}
+])
+
+2.3 Inserción de docentes
