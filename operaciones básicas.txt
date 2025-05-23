@@ -39,6 +39,15 @@ También sirve para cambiar la base de datos en uso, si no existe, la crea.
 Para hacer referencia a la base de datos en uso, usamos la variable 'db'
 Si queremos ver qué base de datos tenemos seleccionado, ejecutamos el comando 'db'
 
+
+			---------------------------------------------
+			--- Creación de Colecciones de Documentos ---
+			---------------------------------------------
+
+Crear una coleción de documentos:
+
+db.createCollection("nombreColeccion")
+
 Para hacer referencia a una base de datos, usamos db.[nombre], de esta manera podremos hacer acciones sobre
 la base de datos que insertemos entre los corchetes.
 
